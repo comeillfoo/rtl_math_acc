@@ -1,4 +1,8 @@
-INFO: [VRFC 10-2263] Analyzing Verilog file "/home/comeillfoo/rtl_math_acc/rtl_math_acc.srcs/sources_1/new/cubic_rt.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module cubic_rt
-INFO: [VRFC 10-2263] Analyzing Verilog file "/home/comeillfoo/rtl_math_acc/rtl_math_acc.srcs/sim_1/new/cubic_rt_tb.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module cubic_rt_tb
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/comeillfoo/rtl_math_acc/rtl_math_acc.srcs/sources_1/new/fn.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fn
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/comeillfoo/rtl_math_acc/rtl_math_acc.srcs/sources_1/new/mult.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mult
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/comeillfoo/rtl_math_acc/rtl_math_acc.srcs/sources_1/new/square_rt.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module square_rt
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/comeillfoo/rtl_math_acc/rtl_math_acc.srcs/sim_1/new/fn_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fn_tb

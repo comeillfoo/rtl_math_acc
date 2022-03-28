@@ -1,4 +1,4 @@
-Running: xsim.dir/cubic_rt_tb_behav/xsimk -simmode gui -wdb cubic_rt_tb_behav.wdb -simrunnum 0 -socket 51557
+Running: xsim.dir/cubic_rt_tb_behav/xsimk -simmode gui -wdb cubic_rt_tb_behav.wdb -simrunnum 0 -socket 45771
 Design successfully loaded
 Design Loading Memory Usage: 37268 KB (Peak: 37324 KB)
 Design Loading CPU Usage: 10 ms

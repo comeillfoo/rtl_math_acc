@@ -22,10 +22,12 @@
 
 module cubic_rt_tb( );
 
-    reg clk, rst, start;
+    reg clk, rst;
     reg [7:0] x;
-    wire busy;
+    wire busy, start;
     wire [7:0] y;
+    assign start = ~rst;
+    
     cubic_rt cubic_rt_1( 
         .clk_i( clk ),
         .rst_i( rst ),
@@ -45,16 +47,14 @@ module cubic_rt_tb( );
         clk = 1'b1;
         for ( i = 0; i < 7; i = i + 1 ) begin
             rst = 1'b1;
-            start = 1'b0;
             x = 0;
             
             #10
             test_val = i * i * i;
             expected_val = i;
             
-            rst = 1'b0;
             x = i * i * i;
-            start = 1'b1;
+            rst = 1'b0;
             
             #110
             if ( expected_val == y ) begin
@@ -65,7 +65,6 @@ module cubic_rt_tb( );
         end
         
         rst = 1'b1;
-        start = 1'b0;
         #20 $stop;
     end
 endmodule

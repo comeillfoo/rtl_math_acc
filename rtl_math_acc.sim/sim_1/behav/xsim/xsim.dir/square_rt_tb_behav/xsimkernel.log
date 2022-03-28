@@ -1,0 +1,7 @@
+Running: xsim.dir/square_rt_tb_behav/xsimk -simmode gui -wdb square_rt_tb_behav.wdb -simrunnum 0 -socket 53237
+Design successfully loaded
+Design Loading Memory Usage: 37268 KB (Peak: 37324 KB)
+Design Loading CPU Usage: 20 ms
+Simulation completed
+Simulation Memory Usage: 119264 KB (Peak: 184540 KB)
+Simulation CPU Usage: 20 ms

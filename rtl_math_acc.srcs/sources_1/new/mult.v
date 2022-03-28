@@ -39,7 +39,7 @@ module mult(
         wire [15:0] shifted_part_sum;
         reg [7:0] a, b;
         reg [15:0] part_res;
-        reg state;
+        reg state = IDLE;
         
         // connect registers with wires
         assign part_sum = a & {8{b[ctr]}}; // {8{b[ctr]}} -> b[ctr]b[ctr]b[ctr]b[ctr]b[ctr]b[ctr]b[ctr]b[ctr]
@@ -51,10 +51,10 @@ module mult(
         // always -- block always executes unlike initial that only at the beginning
         always @( posedge clk_i )
             if ( rst_i ) begin
+                state <= IDLE;
                 ctr <= 0;
                 part_res <= 0;
                 y_bo <= 0;
-                state <= IDLE;
             end else begin
                 case ( state )
                     IDLE:

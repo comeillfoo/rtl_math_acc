@@ -59,6 +59,7 @@ module cubic_rt(
                         s <= START;
                         x <= x_bi;
                         y_b <= 0;
+                        b <= 1 << s;
                     end
                 WORK:
                     begin

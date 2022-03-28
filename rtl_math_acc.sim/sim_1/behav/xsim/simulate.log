@@ -1,9 +1,8 @@
 Vivado Simulator 2017.4
 Time resolution is 1 ps
-CORRECT: actual:   0, expected:   0
-CORRECT: actual:   1, expected:   1
-CORRECT: actual:   2, expected:   2
-CORRECT: actual:   3, expected:   3
-CORRECT: actual:   4, expected:   4
-CORRECT: actual:   5, expected:   5
-CORRECT: actual:   6, expected:   6
+CORRECT: actual:     0, expected:     0
+ERROR: actual:     0, expected:     2, a:   2, b:   1
+ERROR: actual:     0, expected:     4, a:   2, b:   4
+ERROR: actual:     0, expected:     6, a:   2, b:   9
+ERROR: actual:     0, expected:     8, a:   2, b:  16
+ERROR: actual:     0, expected:    10, a:   2, b:  25
