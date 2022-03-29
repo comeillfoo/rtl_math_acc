@@ -30,65 +30,66 @@ module fn(
         output reg [15:0] y_bo
 );
 // localparam -- local constants unlike parameter cannot be redefined or modified by defparam
-localparam IDLE = 1'b0; // digital literal 1'b0 == 0b0
-localparam WORK = 1'b1; // digital literal 1'b1 == 0b1
+localparam IDLE = 2'h0; // digital literal 1'b0 == 0b0
+localparam WORK_SQRT = 2'h1; // digital literal 1'b1 == 0b1
+localparam WORK_MULT = 2'h2;
 
-wire end_step;
+reg [1:0] state = IDLE;
 reg [7:0] a, b;
-reg start_mult = 0;
-reg state;
-wire mult_busy, sqrt_busy; 
-wire [15:0] mult_y;
-wire [7:0] sqrt_y;
+wire [7:0] sqrt_bo;
+wire [15:0] mult_bo;
+// reg [1:0] start;
+wire [1:0] busy;
 
 square_rt square_rt_1(
     .clk_i( clk_i ),
     .rst_i( rst_i ),
     .x_bi( b ),
-    .start_i( start_i ),
-    .busy_o( sqrt_busy ),
-    .y_bo( sqrt_y )
+    .start_i( state[ 0 ] ),
+    .busy_o( busy[ 0 ] ),
+    .y_bo( sqrt_bo )
 );
 
 mult mult_1(
     .clk_i( clk_i ),
-    .rst_i( sqrt_busy | rst_i ),
+    .rst_i( rst_i ),
     .a_bi( a ),
-    .b_bi( sqrt_y ),
-    .start_i( start_mult ),
-    .busy_o( mult_busy ),
-    .y_bo( mult_y ) 
+    .b_bi( sqrt_bo ),
+    .start_i( state[ 1 ] ),
+    .busy_o( busy[ 1 ] ),
+    .y_bo( mult_bo ) 
 );
 
 // connect registers with wires
-assign busy_o = state;
-assign end_step = ( ~mult_busy & ~sqrt_busy );
+assign busy_o = state == IDLE? 0 : 1;
 
 // @ ( <cond> ) -- block triggered at event <cond>
 // always -- block always executes unlike initial that only at the beginning
 always @( posedge clk_i )
     if ( rst_i ) begin
         state <= IDLE;
+        
+        a <= 0;
+        b <= 0;
         y_bo <= 0;
-        start_mult <= 0;
     end else begin
         case ( state )
             IDLE:
                 if ( start_i ) begin
-                    state <= WORK;
+                    state <= WORK_SQRT;
+                    
+                    b <= b_bi;
+                end
+            WORK_SQRT:
+                if ( ~busy[ 0 ] ) begin
+                    state <= WORK_MULT;
                     
                     a <= a_bi;
-                    b <= b_bi;
-                    start_mult <= ~sqrt_busy & start_i;
                 end
-            WORK:
-                begin
-                    if ( end_step ) begin
-                        state <= IDLE;
-                        y_bo <= mult_y;
-                    end
-                    
-                    start_mult <= ~sqrt_busy & start_i;
+            WORK_MULT:
+                if ( ~busy[ 1 ] ) begin
+                    state <= IDLE;
+                    y_bo <= mult_bo;
                 end
         endcase
     end

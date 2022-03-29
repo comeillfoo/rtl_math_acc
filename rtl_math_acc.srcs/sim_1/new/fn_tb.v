@@ -63,7 +63,7 @@ initial begin
             b = j * j;
             rst = 1'b0;
             
-            #150
+            #210
             if ( expected_val == y ) begin
                 $display( "CORRECT: actual: %d, expected: %d", y, expected_val );
             end else begin

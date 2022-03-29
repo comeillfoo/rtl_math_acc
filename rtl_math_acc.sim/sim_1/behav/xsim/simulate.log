@@ -4,5 +4,3 @@ CORRECT: actual:     0, expected:     0
 ERROR: actual:     0, expected:     2, a:   2, b:   1
 ERROR: actual:     0, expected:     4, a:   2, b:   4
 ERROR: actual:     0, expected:     6, a:   2, b:   9
-ERROR: actual:     0, expected:     8, a:   2, b:  16
-ERROR: actual:     0, expected:    10, a:   2, b:  25
