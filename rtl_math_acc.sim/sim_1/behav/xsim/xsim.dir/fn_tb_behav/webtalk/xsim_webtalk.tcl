@@ -1,6 +1,6 @@
 webtalk_init -webtalk_dir /home/comeillfoo/rtl_math_acc/rtl_math_acc.sim/sim_1/behav/xsim/xsim.dir/fn_tb_behav/webtalk/
 webtalk_register_client -client project
-webtalk_add_data -client project -key date_generated -value "Tue Mar 29 13:29:08 2022" -context "software_version_and_target_device"
+webtalk_add_data -client project -key date_generated -value "Wed Mar 30 16:16:22 2022" -context "software_version_and_target_device"
 webtalk_add_data -client project -key product_version -value "XSIM v2017.4 (64-bit)" -context "software_version_and_target_device"
 webtalk_add_data -client project -key build_version -value "2086221" -context "software_version_and_target_device"
 webtalk_add_data -client project -key os_platform -value "LIN64" -context "software_version_and_target_device"
@@ -14,7 +14,7 @@ webtalk_add_data -client project -key target_package -value "not_applicable" -co
 webtalk_add_data -client project -key target_speed -value "not_applicable" -context "software_version_and_target_device"
 webtalk_add_data -client project -key random_id -value "ff538264-af4c-4b77-9b87-764b4e52f015" -context "software_version_and_target_device"
 webtalk_add_data -client project -key project_id -value "56c2b1fc71394f73851b29445813358d" -context "software_version_and_target_device"
-webtalk_add_data -client project -key project_iteration -value "73" -context "software_version_and_target_device"
+webtalk_add_data -client project -key project_iteration -value "95" -context "software_version_and_target_device"
 webtalk_add_data -client project -key os_name -value "Ubuntu" -context "user_environment"
 webtalk_add_data -client project -key os_release -value "Ubuntu 20.04.3 LTS" -context "user_environment"
 webtalk_add_data -client project -key cpu_name -value "Intel(R) Core(TM) i5-1035G1 CPU @ 1.00GHz" -context "user_environment"
@@ -24,9 +24,9 @@ webtalk_add_data -client project -key system_ram -value "4.000 GB" -context "use
 webtalk_register_client -client xsim
 webtalk_add_data -client xsim -key Command -value "xsim" -context "xsim\\command_line_options"
 webtalk_add_data -client xsim -key trace_waveform -value "true" -context "xsim\\usage"
-webtalk_add_data -client xsim -key runtime -value "1 us" -context "xsim\\usage"
-webtalk_add_data -client xsim -key iteration -value "2" -context "xsim\\usage"
+webtalk_add_data -client xsim -key runtime -value "20 ns" -context "xsim\\usage"
+webtalk_add_data -client xsim -key iteration -value "0" -context "xsim\\usage"
 webtalk_add_data -client xsim -key Simulation_Time -value "0.02_sec" -context "xsim\\usage"
-webtalk_add_data -client xsim -key Simulation_Memory -value "123384_KB" -context "xsim\\usage"
-webtalk_transmit -clientid 3661115375 -regid "" -xml /home/comeillfoo/rtl_math_acc/rtl_math_acc.sim/sim_1/behav/xsim/xsim.dir/fn_tb_behav/webtalk/usage_statistics_ext_xsim.xml -html /home/comeillfoo/rtl_math_acc/rtl_math_acc.sim/sim_1/behav/xsim/xsim.dir/fn_tb_behav/webtalk/usage_statistics_ext_xsim.html -wdm /home/comeillfoo/rtl_math_acc/rtl_math_acc.sim/sim_1/behav/xsim/xsim.dir/fn_tb_behav/webtalk/usage_statistics_ext_xsim.wdm -intro "<H3>XSIM Usage Report</H3><BR>"
+webtalk_add_data -client xsim -key Simulation_Memory -value "131840_KB" -context "xsim\\usage"
+webtalk_transmit -clientid 2033932029 -regid "" -xml /home/comeillfoo/rtl_math_acc/rtl_math_acc.sim/sim_1/behav/xsim/xsim.dir/fn_tb_behav/webtalk/usage_statistics_ext_xsim.xml -html /home/comeillfoo/rtl_math_acc/rtl_math_acc.sim/sim_1/behav/xsim/xsim.dir/fn_tb_behav/webtalk/usage_statistics_ext_xsim.html -wdm /home/comeillfoo/rtl_math_acc/rtl_math_acc.sim/sim_1/behav/xsim/xsim.dir/fn_tb_behav/webtalk/usage_statistics_ext_xsim.wdm -intro "<H3>XSIM Usage Report</H3><BR>"
 webtalk_terminate

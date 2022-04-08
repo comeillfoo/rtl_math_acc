@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../rtl_math_acc.srcs/sources_1/new/that_fucking_stupid_function_which_not_working_cause_of_stupid_synchronization.v" \
+"../../../../rtl_math_acc.srcs/sim_1/new/mult_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

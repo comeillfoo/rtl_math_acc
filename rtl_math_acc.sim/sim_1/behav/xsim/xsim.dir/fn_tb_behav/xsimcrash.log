@@ -1,0 +1,12 @@
+Printing stacktrace...
+
+[0] /opt/Xilinx/Vivado/2017.4/lib/lnx64.o/librdi_simulator_kernel.so(iki_vlog_schedule_transaction_nonblocking_event_control_on_event+0x85) [0x7f9715d8fc05]
+[1] xsim.dir/fn_tb_behav/xsimk(+0x3a5f) [0x5650d7d62a5f]
+[2] /opt/Xilinx/Vivado/2017.4/lib/lnx64.o/librdi_simulator_kernel.so(+0x25deea) [0x7f9715e4feea]
+[3] /opt/Xilinx/Vivado/2017.4/lib/lnx64.o/librdi_simulator_kernel.so(ISIMK::Kernel::callProcessExecuteFunctions()+0x59) [0x7f9715e4bf69]
+[4] /opt/Xilinx/Vivado/2017.4/lib/lnx64.o/librdi_simulator_kernel.so(ISIMK::HdlQ::processTimeSlots()+0xa7) [0x7f9715e482e7]
+[5] /opt/Xilinx/Vivado/2017.4/lib/lnx64.o/librdi_simulator_kernel.so(ISIMK::GDBMIHost::runSimulationLoop()+0x139) [0x7f9715e43199]
+[6] /opt/Xilinx/Vivado/2017.4/lib/lnx64.o/Ubuntu/libstdc++.so.6(+0xb8cbf) [0x7f9715008cbf]
+[7] /lib/x86_64-linux-gnu/libpthread.so.0(+0x8609) [0x7f9715733609]
+[8] /lib/x86_64-linux-gnu/libc.so.6(clone+0x43) [0x7f971586d163]
+Done
