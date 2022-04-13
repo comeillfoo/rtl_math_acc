@@ -29,7 +29,7 @@ reg [15:0] expected_val;
 integer i, j;
 initial begin
     clk = 1;
-    for ( i = 0; i < 256; i = i + 1 ) begin
+    for ( i = 1; i < 256; i = i + 1 ) begin
         for ( j = 0; j < 16; j = j + 1 ) begin
             b = j * j;
             a = i;
