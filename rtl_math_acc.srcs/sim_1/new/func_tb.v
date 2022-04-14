@@ -3,13 +3,12 @@
 
 module func_tb( );
 
-reg clk, rst;
+reg clk, rst, start;
 reg [7:0] a;
 reg [7:0] b;
-wire start, f_busy, end_step;
+wire f_busy, end_step;
 wire [15:0] y;
 
-assign start = ~rst;
 
 func f(
     .clk( clk ),
@@ -29,15 +28,23 @@ reg [15:0] expected_val;
 integer i, j;
 initial begin
     clk = 1;
+    rst = 1;
+    start = 0;
     for ( i = 1; i < 256; i = i + 1 ) begin
         for ( j = 0; j < 16; j = j + 1 ) begin
-            b = j * j;
+            a = 0;
+            b = 0;
+            
+            #20
+            expected_val = i * j;
             a = i;
-            rst = 1;
+            b = j * j;
+            
+            rst = 0;
+            start = 1;
             
             #10
-            expected_val = i * j;
-            rst = 0;
+            start = 0;
             
             #290
             if ( expected_val == y ) begin

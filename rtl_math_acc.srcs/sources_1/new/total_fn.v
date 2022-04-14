@@ -1,75 +1,90 @@
 `timescale 1ns / 1ps
 
-
+/**
+ * 
+ */
 module func(
     input clk,
     input rst,
     input start,
     input [7:0] a_b,
     input [7:0] b_b,
-    output reg [15:0] y_b,
-    output reg busy,
+    output wire [15:0] y_b,
+    output wire busy,
     output [2:0] end_step_b
 );
 
-reg s_start_i, s_rst_i;
+// prototype sqrt module
+// the module signals:
+// reg s_start_i, s_rst_i;
 reg [7:0] s_x_bi;
 wire [7:0] s_y_bo;
 wire s_busy_o, s_end_step_bo;
 
-always @( posedge clk ) begin
-    if ( rst ) begin
-        s_rst_i <= 1;
-        s_start_i <= 0;
-        s_x_bi <= b_b;
-    end else if ( start ) begin
-        if ( s_end_step_bo ) begin
-            s_rst_i <= 0;
-            s_start_i <= 0;
-        end else begin
-            s_rst_i <= 0;
-            s_start_i <= 1;
-        end
-    end
-end
-
+// the module itself:
 sqrt s(
     .clk_i( clk ),
-    .rst_i( s_rst_i ),
-    .start_i( s_start_i ),
+    .rst_i( rst ),
+    .start_i( start ),
     .x_bi( s_x_bi ),
     .y_bo( s_y_bo ),
     .busy_o( s_busy_o ),
     .end_step_bo( s_end_step_bo )
 );
 
-reg m_start_i, m_rst_i;
+
+// list of states:
+localparam ST_IDLE = 2'b01;
+localparam ST_SQRT_WORK = 2'b10;
+localparam ST_MULT_WORK = 2'b11;
+
+reg [1:0] state;
+
+// fms description
+always @( posedge clk )
+    case ( state )
+        ST_IDLE: state <= 
+            ( rst )? ST_IDLE : 
+            ( start )? ST_SQRT_WORK : state;
+            
+        ST_SQRT_WORK: state <=
+            ( rst )? ST_IDLE :
+            ( s_end_step_bo )? ST_MULT_WORK : state;
+        
+        ST_MULT_WORK: state <=
+            ( rst | end_step_b )? ST_IDLE : state;
+            
+        default: state <=
+            ( rst )? ST_IDLE : state;
+    endcase
+
+
+// sqrt start and reset behavioural description
+// suppose sqrt start ans reset are external start and reset 
+
+
+// x behavioural description
+always @( posedge clk )
+    case ( state )
+        ST_IDLE: s_x_bi <= ( start )? b_b : s_x_bi;
+        ST_SQRT_WORK: s_x_bi <= b_b;
+        ST_MULT_WORK: s_x_bi <= s_x_bi;
+        default: s_x_bi <= s_x_bi;
+    endcase
+
+
+// prototype mult module
+// the module signals
 reg [7:0] m_a_bi;
 reg [7:0] m_b_bi;
 wire m_busy_o;
 wire [15:0] m_y_bo;
 
-always @( posedge clk ) begin
-    if ( rst ) begin
-        m_rst_i <= 1;
-        m_start_i <= 0;
-        y_b <= 0;
-    end else if ( s_end_step_bo ) begin
-        m_rst_i <= 0;
-        m_start_i <= 1;
-        m_a_bi <= a_b;
-        m_b_bi <= s_y_bo;
-    end else if ( end_step_b ) begin
-        m_rst_i <= 0;
-        m_start_i <= 0;
-        y_b <= m_y_bo;
-    end
-end
-
+// the module itself
 mult m(
     .clk_i( clk ),
-    .rst_i( m_rst_i ),
-    .start_i( m_start_i ),
+    .rst_i( rst ),
+    .start_i( s_end_step_bo ),
     .a_bi( m_a_bi ),
     .b_bi( m_b_bi ),
     .y_bo( m_y_bo ),
@@ -77,14 +92,32 @@ mult m(
     .end_step_bo( end_step_b )
 );
 
-always @( posedge clk ) begin
-    if ( rst )
-        busy <= 0;
-    else if ( start )
-        if ( end_step_b )
-            busy <= 0;
-        else
-            busy <= 1;
-end
+
+// multiplier inputs behavioural description
+always @( posedge clk )
+    case ( state )
+        ST_IDLE: begin
+            m_a_bi <= m_a_bi;
+            m_b_bi <= m_b_bi;
+        end
+        ST_SQRT_WORK:
+            if ( s_end_step_bo ) begin
+                m_a_bi <= a_b;
+                m_b_bi <= s_y_bo;
+            end
+            
+        ST_MULT_WORK: begin
+            m_a_bi <= m_a_bi;
+            m_b_bi <= m_b_bi;
+        end
+        default: begin
+            m_a_bi <= m_a_bi;
+            m_b_bi <= m_b_bi;
+        end
+    endcase
+
+// the total function behavioural description
+assign busy = s_busy_o | m_busy_o;
+assign y_b = m_y_bo;
 
 endmodule
