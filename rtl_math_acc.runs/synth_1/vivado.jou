@@ -2,11 +2,11 @@
 # Vivado v2017.4 (64-bit)
 # SW Build 2086221 on Fri Dec 15 20:54:30 MST 2017
 # IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017
-# Start of session at: Wed Apr 27 02:09:08 2022
-# Process ID: 15759
+# Start of session at: Fri Apr 29 02:34:28 2022
+# Process ID: 19082
 # Current directory: /home/comeillfoo/rtl_math_acc/rtl_math_acc.runs/synth_1
-# Command line: vivado -log func.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source func.tcl
-# Log file: /home/comeillfoo/rtl_math_acc/rtl_math_acc.runs/synth_1/func.vds
+# Command line: vivado -log total_fn_7seg_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source total_fn_7seg_wrapper.tcl
+# Log file: /home/comeillfoo/rtl_math_acc/rtl_math_acc.runs/synth_1/total_fn_7seg_wrapper.vds
 # Journal file: /home/comeillfoo/rtl_math_acc/rtl_math_acc.runs/synth_1/vivado.jou
 #-----------------------------------------------------------
-source func.tcl -notrace
+source total_fn_7seg_wrapper.tcl -notrace

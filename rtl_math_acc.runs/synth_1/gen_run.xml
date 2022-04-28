@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1651014546">
-  <File Type="PA-TCL" Name="func.tcl"/>
-  <File Type="REPORTS-TCL" Name="func_reports.tcl"/>
-  <File Type="RDS-RDS" Name="func.vds"/>
-  <File Type="RDS-DCP" Name="func.dcp"/>
-  <File Type="RDS-UTIL-PB" Name="func_utilization_synth.pb"/>
-  <File Type="RDS-UTIL" Name="func_utilization_synth.rpt"/>
+<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1651188866">
+  <File Type="VDS-TIMING-PB" Name="total_fn_7seg_wrapper_timing_summary_synth.pb"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="total_fn_7seg_wrapper_timing_summary_synth.rpt"/>
+  <File Type="RDS-DCP" Name="total_fn_7seg_wrapper.dcp"/>
+  <File Type="RDS-UTIL-PB" Name="total_fn_7seg_wrapper_utilization_synth.pb"/>
+  <File Type="RDS-UTIL" Name="total_fn_7seg_wrapper_utilization_synth.rpt"/>
+  <File Type="RDS-PROPCONSTRS" Name="total_fn_7seg_wrapper_drc_synth.rpt"/>
+  <File Type="RDS-RDS" Name="total_fn_7seg_wrapper.vds"/>
+  <File Type="REPORTS-TCL" Name="total_fn_7seg_wrapper_reports.tcl"/>
+  <File Type="PA-TCL" Name="total_fn_7seg_wrapper.tcl"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/subfn.v">
@@ -22,9 +25,16 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/new/total_fn_7seg_wrapper.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="func"/>
+      <Option Name="TopModule" Val="total_fn_7seg_wrapper"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
