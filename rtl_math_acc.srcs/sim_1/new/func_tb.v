@@ -30,7 +30,7 @@ initial begin
     clk = 1;
     rst = 1;
     start = 0;
-    for ( i = 1; i < 256; i = i + 1 ) begin
+    for ( i = 215; i < 256; i = i + 1 ) begin
         for ( j = 0; j < 16; j = j + 1 ) begin
             a = 0;
             b = 0;
