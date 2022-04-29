@@ -1,52 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="impl_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1651014546">
-  <File Type="PA-TCL" Name="func.tcl"/>
-  <File Type="PLACE-DCP" Name="func_placed.dcp"/>
-  <File Type="REPORTS-TCL" Name="func_reports.tcl"/>
-  <File Type="PWROPT-DCP" Name="func_pwropt.dcp"/>
-  <File Type="OPT-DCP" Name="func_opt.dcp"/>
-  <File Type="OPT-DRC" Name="func_drc_opted.rpt"/>
-  <File Type="OPT-HWDEF" Name="func.hwdef"/>
-  <File Type="RDI-RDI" Name="func.vdi"/>
-  <File Type="PLACE-IO" Name="func_io_placed.rpt"/>
-  <File Type="PLACE-UTIL" Name="func_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL-PB" Name="func_utilization_placed.pb"/>
-  <File Type="PLACE-CTRL" Name="func_control_sets_placed.rpt"/>
-  <File Type="PLACE-PRE-SIMILARITY" Name="func_incremental_reuse_pre_placed.rpt"/>
-  <File Type="POSTPLACE-PWROPT-DCP" Name="func_postplace_pwropt.dcp"/>
-  <File Type="PHYSOPT-DCP" Name="func_physopt.dcp"/>
+  <File Type="ROUTE-DCP" Name="func_routed.dcp"/>
   <File Type="BG-BIT" Name="func.bit"/>
-  <File Type="ROUTE-STATUS-PB" Name="func_route_status.pb"/>
-  <File Type="BG-BIN" Name="func.bin"/>
-  <File Type="ROUTE-TIMINGSUMMARY" Name="func_timing_summary_routed.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="func_physopt.dcp"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="func_postplace_pwropt.dcp"/>
+  <File Type="RDI-RDI" Name="func.vdi"/>
+  <File Type="OPT-HWDEF" Name="func.hwdef"/>
+  <File Type="BITSTR-SYSDEF" Name="func.sysdef"/>
+  <File Type="PLACE-DCP" Name="func_placed.dcp"/>
+  <File Type="PA-TCL" Name="func.tcl"/>
   <File Type="BITSTR-MSK" Name="func.msk"/>
   <File Type="ROUTE-TIMING-PB" Name="func_timing_summary_routed.pb"/>
   <File Type="BITSTR-RBT" Name="func.rbt"/>
-  <File Type="ROUTE-TIMING-RPX" Name="func_timing_summary_routed.rpx"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="func_incremental_reuse_pre_placed.rpt"/>
+  <File Type="OPT-DCP" Name="func_opt.dcp"/>
+  <File Type="BITSTR-MMI" Name="func.mmi"/>
+  <File Type="REPORTS-TCL" Name="func_reports.tcl"/>
+  <File Type="PWROPT-DCP" Name="func_pwropt.dcp"/>
+  <File Type="BITSTR-LTX" Name="func.ltx"/>
+  <File Type="BG-BIN" Name="func.bin"/>
   <File Type="BITSTR-NKY" Name="func.nky"/>
   <File Type="BITSTR-BMM" Name="func_bd.bmm"/>
-  <File Type="ROUTE-CLK" Name="func_clock_utilization_routed.rpt"/>
   <File Type="BG-DRC" Name="func.drc"/>
   <File Type="ROUTE-ERROR-DCP" Name="func_routed_error.dcp"/>
-  <File Type="BITSTR-MMI" Name="func.mmi"/>
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
   <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="func_postroute_physopt_bb.dcp"/>
   <File Type="BG-BGN" Name="func.bgn"/>
   <File Type="ROUTE-BLACKBOX-DCP" Name="func_routed_bb.dcp"/>
-  <File Type="BITSTR-SYSDEF" Name="func.sysdef"/>
-  <File Type="BITSTR-LTX" Name="func.ltx"/>
   <File Type="POSTROUTE-PHYSOPT-DCP" Name="func_postroute_physopt.dcp"/>
-  <File Type="ROUTE-STATUS" Name="func_route_status.rpt"/>
-  <File Type="ROUTE-PWR-RPX" Name="func_power_routed.rpx"/>
-  <File Type="ROUTE-PWR-SUM" Name="func_power_summary_routed.pb"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="func_methodology_drc_routed.rpx"/>
-  <File Type="ROUTE-PWR" Name="func_power_routed.rpt"/>
-  <File Type="ROUTE-DRC-RPX" Name="func_drc_routed.rpx"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="func_methodology_drc_routed.pb"/>
-  <File Type="ROUTE-DRC-PB" Name="func_drc_routed.pb"/>
-  <File Type="ROUTE-METHODOLOGY-DRC" Name="func_methodology_drc_routed.rpt"/>
-  <File Type="ROUTE-DRC" Name="func_drc_routed.rpt"/>
-  <File Type="ROUTE-DCP" Name="func_routed.dcp"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/subfn.v">
