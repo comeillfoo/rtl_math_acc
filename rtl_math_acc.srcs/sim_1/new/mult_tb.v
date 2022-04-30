@@ -16,7 +16,7 @@ mult m(
     .b_bi( b ),
     .y_bo( y ),
     .busy_o( busy ),
-    .end_step_bo( end_step )
+    .end_step_o( end_step )
 );
 
 always #10 clk = ~clk;

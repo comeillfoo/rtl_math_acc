@@ -11,7 +11,7 @@ module func(
     input [7:0] b_b,
     output wire [15:0] y_b,
     output wire busy,
-    output [2:0] end_step_b
+    output wire end_step
 );
 
 // prototype sqrt module
@@ -19,7 +19,7 @@ module func(
 // reg s_start_i, s_rst_i;
 reg [7:0] s_x_bi;
 wire [7:0] s_y_bo;
-wire s_busy_o, s_end_step_bo;
+wire s_busy_o, s_end_step_o;
 
 // the module itself:
 sqrt s(
@@ -29,7 +29,7 @@ sqrt s(
     .x_bi( s_x_bi ),
     .y_bo( s_y_bo ),
     .busy_o( s_busy_o ),
-    .end_step_bo( s_end_step_bo )
+    .end_step_o( s_end_step_o )
 );
 
 
@@ -49,10 +49,10 @@ always @( posedge clk )
             
         ST_SQRT_WORK: state <=
             ( rst )? ST_IDLE :
-            ( s_end_step_bo )? ST_MULT_WORK : state;
+            ( s_end_step_o )? ST_MULT_WORK : state;
         
         ST_MULT_WORK: state <=
-            ( rst | end_step_b )? ST_IDLE : state;
+            ( rst | end_step )? ST_IDLE : state;
             
         default: state <=
             ( rst )? ST_IDLE : state;
@@ -84,12 +84,12 @@ wire [15:0] m_y_bo;
 mult m(
     .clk_i( clk ),
     .rst_i( rst ),
-    .start_i( s_end_step_bo ),
+    .start_i( s_end_step_o ),
     .a_bi( m_a_bi ),
     .b_bi( m_b_bi ),
     .y_bo( m_y_bo ),
     .busy_o( m_busy_o ),
-    .end_step_bo( end_step_b )
+    .end_step_o( end_step )
 );
 
 
@@ -101,7 +101,7 @@ always @( posedge clk )
             m_b_bi <= m_b_bi;
         end
         ST_SQRT_WORK:
-            if ( s_end_step_bo ) begin
+            if ( s_end_step_o ) begin
                 m_a_bi <= a_b;
                 m_b_bi <= s_y_bo;
             end

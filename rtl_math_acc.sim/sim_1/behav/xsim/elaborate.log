@@ -1,13 +1,22 @@
 Vivado Simulator 2017.4
 Copyright 1986-1999, 2001-2016 Xilinx, Inc. All Rights Reserved.
-Running: /opt/Xilinx/Vivado/2017.4/bin/unwrapped/lnx64.o/xelab -wto 56c2b1fc71394f73851b29445813358d --incr --debug typical --relax --mt 8 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot bcd_converter_tb_behav xil_defaultlib.bcd_converter_tb xil_defaultlib.glbl -log elaborate.log 
+Running: /opt/Xilinx/Vivado/2017.4/bin/unwrapped/lnx64.o/xelab -wto 56c2b1fc71394f73851b29445813358d --incr --debug typical --relax --mt 8 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot func_wrapper_tb_behav xil_defaultlib.func_wrapper_tb xil_defaultlib.glbl -log elaborate.log 
 Using 8 slave threads.
 Starting static elaboration
 Completed static elaboration
 Starting simulation data flow analysis
 Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
-Compiling module xil_defaultlib.bcd_converter_default
-Compiling module xil_defaultlib.bcd_converter_tb
+Compiling module xil_defaultlib.sqrt_default
+Compiling module xil_defaultlib.mult
+Compiling module xil_defaultlib.func
+Compiling module xil_defaultlib.bcd_converter
+Compiling module xil_defaultlib.clock_divider(DIVISOR=10)
+Compiling module xil_defaultlib.digit_selector
+Compiling module xil_defaultlib.bcd_control
+Compiling module xil_defaultlib.bcd_to_cathodes
+Compiling module xil_defaultlib.bcd_to_anodes
+Compiling module xil_defaultlib.func_wrapper(FN_DIVISOR=10)
+Compiling module xil_defaultlib.func_wrapper_tb
 Compiling module xil_defaultlib.glbl
-Built simulation snapshot bcd_converter_tb_behav
+Built simulation snapshot func_wrapper_tb_behav

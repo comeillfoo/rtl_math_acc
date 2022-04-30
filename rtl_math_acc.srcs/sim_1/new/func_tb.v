@@ -1,12 +1,12 @@
 `timescale 1ns / 1ps
 
 
-module func_tb( );
+module func_tb;
 
 reg clk, rst, start;
 reg [7:0] a;
 reg [7:0] b;
-wire f_busy, end_step;
+wire f_busy, f_end_step;
 wire [15:0] y;
 
 
@@ -18,7 +18,7 @@ func f(
     .b_b( b ),
     .y_b( y ),
     .busy( f_busy ),
-    .end_step_b( end_step )
+    .end_step( f_end_step )
 );
 
 always #10 clk = ~clk;

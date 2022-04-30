@@ -18,7 +18,7 @@ module mult(
     input [7:0] b_bi,
     output reg [15:0] y_bo,
     output reg busy_o,
-    output [2:0] end_step_bo
+    output end_step_o
 );
 
 // some useful constants
@@ -43,7 +43,7 @@ always @( posedge clk_i )
         ST_REQUEST_ACCEPTED: state <=
             ( rst_i )? ST_IDLE : ST_WORK;
             
-        ST_WORK: state <= ( rst_i | end_step_bo )? ST_IDLE : state;
+        ST_WORK: state <= ( rst_i | end_step_o )? ST_IDLE : state;
         default: state <= ( rst_i )? ST_IDLE : state;
     endcase
 
@@ -58,7 +58,7 @@ always @( posedge clk_i )
         case ( state )
             ST_IDLE: ctr <= ctr;
             ST_REQUEST_ACCEPTED: ctr <= CTR_DEFAULT;
-            ST_WORK: ctr <= ( end_step_bo )? CTR_DEFAULT : next_ctr;
+            ST_WORK: ctr <= ( end_step_o )? CTR_DEFAULT : next_ctr;
             default: ctr <= ctr;
         endcase
 
@@ -71,7 +71,7 @@ always @( posedge clk_i )
         case ( state )
             ST_IDLE: busy_o <= busy_o;
             ST_REQUEST_ACCEPTED: busy_o <= 1;
-            ST_WORK: busy_o <= ( end_step_bo )? 0 : busy_o;
+            ST_WORK: busy_o <= ( end_step_o )? 0 : busy_o;
             default: busy_o <= busy_o;
         endcase
 
@@ -94,7 +94,7 @@ always @( posedge clk_i )
         endcase
 
 
-assign end_step_bo = ctr == CTR_LIMIT;
+assign end_step_o = ctr == CTR_LIMIT;
 endmodule
 
 
@@ -109,7 +109,7 @@ module sqrt(
     input [7:0] x_bi,
     output reg [7:0] y_bo,
     output reg busy_o,
-    output [7:0] end_step_bo
+    output end_step_o
 );
 
 localparam N = 8;
@@ -134,7 +134,7 @@ always @( posedge clk_i )
             ( rst_i )? ST_IDLE : ST_WORK;
         
         ST_WORK: state <= 
-            ( rst_i | end_step_bo )? ST_IDLE : state;
+            ( rst_i | end_step_o )? ST_IDLE : state;
             
         default: state <= ( rst_i )? ST_IDLE : state;
     endcase
@@ -150,7 +150,7 @@ always @( posedge clk_i )
         case ( state )
             ST_IDLE: m <= m;
             ST_REQUEST_ACCEPTED: m <= M_DEFAULT;
-            ST_WORK: m <= ( end_step_bo )? M_DEFAULT : shifted_m;
+            ST_WORK: m <= ( end_step_o )? M_DEFAULT : shifted_m;
             default: m <= m;
         endcase
 
@@ -162,7 +162,7 @@ always @( posedge clk_i )
         case ( state )
             ST_IDLE: busy_o <= busy_o;
             ST_REQUEST_ACCEPTED: busy_o <= 1;
-            ST_WORK: busy_o <= ( end_step_bo )? 0 : busy_o;
+            ST_WORK: busy_o <= ( end_step_o )? 0 : busy_o;
             default: busy_o <= busy_o;
         endcase
 
@@ -196,5 +196,5 @@ always @( posedge clk_i )
         endcase
 
 
-assign end_step_bo = m == M_LIMIT;
+assign end_step_o = m == M_LIMIT;
 endmodule

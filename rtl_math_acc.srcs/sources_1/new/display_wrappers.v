@@ -19,34 +19,68 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+// divides main clock of 100 MHz to 2 Hz for 7 segment display refreshment rate
+module clock_divider
+    #(parameter DIVISOR = 50_000_000) (
+    input clk,
+    output reg quotient_clk = 0   
+);
+localparam divisor = DIVISOR - 1; // 2 Hz
+
+integer counter = 0;
+
+always @( posedge clk )
+    if ( counter == divisor )
+        counter <= 0;
+    else
+        counter <= counter + 1;
+
+always @( posedge clk )
+    if ( counter == divisor )
+        quotient_clk <= ~quotient_clk;
+
+endmodule
+
+
+// counter to select digit
+module digit_selector(
+    input clk,
+    output reg [2:0] nr_digit_b = 0
+);
+
+always @( posedge clk )
+    nr_digit_b <= nr_digit_b + 1;
+
+endmodule
+
+
 // converts binary to BCD using Double Dabble Algorithm
 module bcd_converter(
-    input clk_i,
-    input start_i,
-    input rst_i,
-    input [15:0] half_word_bi,
-    output [3:0] d0_bo,
-    output [3:0] d1_bo,
-    output [3:0] d2_bo,
-    output [3:0] d3_bo,
-    output [3:0] d4_bo,
-    output [3:0] d5_bo,
-    output [3:0] d6_bo,
-    output [3:0] d7_bo,
-    output [3:0] end_step_bo,
-    output busy_o
+    input clk,
+    input start,
+    input rst,
+    input [15:0] half_word_b,
+    output [3:0] d0_b,
+    output [3:0] d1_b,
+    output [3:0] d2_b,
+    output [3:0] d3_b,
+    output [3:0] d4_b,
+    output [3:0] d5_b,
+    output [3:0] d6_b,
+    output [3:0] d7_b,
+    output end_step,
+    output busy
 ); // yeap 8 digits contains 7 segment display
 
 localparam ST_IDLE = 2'b00;
 localparam ST_WORK = 2'b01;
-localparam CTR_FINAL = 16;
-localparam CTR_LIMIT = CTR_FINAL - 1;
+localparam CTR_LIMIT = 15;
 
 reg [1:0] state;
 reg [4:0] ctr;
 reg [31:0] bcd_actual; 
 reg [3:0] digits [7:0];
-wire [31:0] bcd_shifted; assign bcd_shifted = {bcd_actual[30:0], half_word_bi[15 - ctr]};
+wire [31:0] bcd_shifted; assign bcd_shifted = {bcd_actual[30:0], half_word_b[15 - ctr]};
 wire [31:0] bcd_increased;
 
 assign bcd_increased[ 3: 0] = ( ctr < CTR_LIMIT && bcd_shifted[ 3: 0] > 4 )? bcd_shifted[ 3: 0] + 3 : bcd_shifted[ 3: 0];
@@ -58,8 +92,8 @@ assign bcd_increased[23:20] = ( ctr < CTR_LIMIT && bcd_shifted[23:20] > 4 )? bcd
 assign bcd_increased[27:24] = ( ctr < CTR_LIMIT && bcd_shifted[27:24] > 4 )? bcd_shifted[27:24] + 3 : bcd_shifted[27:24];
 assign bcd_increased[31:28] = ( ctr < CTR_LIMIT && bcd_shifted[31:28] > 4 )? bcd_shifted[31:28] + 3 : bcd_shifted[31:28];
 
-always @(posedge clk_i) begin
-    if ( rst_i ) begin
+always @( posedge clk ) begin
+    if ( rst ) begin
         state <= ST_IDLE;
         ctr <= 0;
         bcd_actual <= 0;
@@ -68,13 +102,13 @@ always @(posedge clk_i) begin
     end else
         case ( state )
             ST_IDLE:
-                if ( start_i ) begin
+                if ( start ) begin
                     state <= ST_WORK;
                     bcd_actual <= 0;
                     ctr <= 0;
                 end
             ST_WORK:
-                if ( end_step_bo ) begin
+                if ( end_step ) begin
                     state <= ST_IDLE;
                     ctr <= 0;
                     bcd_actual <= 0;
@@ -87,53 +121,114 @@ always @(posedge clk_i) begin
         endcase
 end
 
-assign end_step_bo = ( ctr == CTR_LIMIT );
+assign end_step = ( ctr == CTR_LIMIT );
 
-assign d0_bo = digits[0];
-assign d1_bo = digits[1];
-assign d2_bo = digits[2];
-assign d3_bo = digits[3];
-assign d4_bo = digits[4];
-assign d5_bo = digits[5];
-assign d6_bo = digits[6];
-assign d7_bo = digits[7];
+assign d0_b = digits[0];
+assign d1_b = digits[1];
+assign d2_b = digits[2];
+assign d3_b = digits[3];
+assign d4_b = digits[4];
+assign d5_b = digits[5];
+assign d6_b = digits[6];
+assign d7_b = digits[7];
 
-assign busy_o = ( state == ST_WORK );
+assign busy = ( state == ST_WORK );
 
 endmodule
 
 
-//module bcd_dc(
-//    input [3:0] digit_bi,
-//    output reg [7:0] cathodes_bo // [ DP, CG, CF, CE, CD, CC, CB, CA ]
-//);
+// multiplexer MX8_1 with buses
+module bcd_control(
+    input [2:0] nr_digit_b,
+    input [3:0] d0_b, d1_b, d2_b, d3_b, d4_b, d5_b, d6_b, d7_b,
+    output reg [3:0] digit_b
+);
 
-//always @(*) begin
-//    //                        PGFE DCBA
-//    case (digit_bi)
-//        4'd0:
-//            cathodes_bo <= 8'b1100_0000;
-//        4'd1:
-//            cathodes_bo <= 8'b1111_1001;
-//        4'd2:
-//            cathodes_bo <= 8'b1010_0100;
-//        4'd3:
-//            cathodes_bo <= 8'b1011_0000;
-//        4'd4:
-//            cathodes_bo <= 8'b1001_1001;
-//        4'd5:
-//            cathodes_bo <= 8'b1001_0010;
-//        4'd6:
-//            cathodes_bo <= 8'b1000_0010;
-//        4'd7:
-//            cathodes_bo <= 8'b1111_1000;
-//        4'd8:
-//            cathodes_bo <= 8'b1100_0000;
-//        4'd9:
-//            cathodes_bo <= 8'b1001_0000;
-//        default:
-//            cathodes_bo <= 8'b1111_1111;
-//    endcase
-//end
+always @(*)
+    case ( nr_digit_b )
+        3'd0:
+            digit_b = d0_b;
+        3'd1:
+            digit_b = d1_b;
+        3'd2:
+            digit_b = d2_b;
+        3'd3:
+            digit_b = d3_b;
+        3'd4:
+            digit_b = d4_b;
+        3'd5:
+            digit_b = d5_b;
+        3'd6:
+            digit_b = d6_b;
+        3'd7:
+            digit_b = d7_b;
+        default:
+            digit_b = d0_b;
+    endcase
 
-//endmodule
+endmodule
+
+
+// transforms BCD digit into cathodes' control signals
+module bcd_to_cathodes(
+    input [3:0] digit_b,
+    output reg [7:0] cathodes_b // [ DP, CG, CF, CE, CD, CC, CB, CA ]
+);
+
+always @( digit_b )
+    case ( digit_b )
+        4'd0:
+            cathodes_b = 8'b1100_0000;
+        4'd1:
+            cathodes_b = 8'b1111_1001;
+        4'd2:
+            cathodes_b = 8'b1010_0100;
+        4'd3:
+            cathodes_b = 8'b1011_0000;
+        4'd4:
+            cathodes_b = 8'b1001_1001;
+        4'd5:
+            cathodes_b = 8'b1001_0010;
+        4'd6:
+            cathodes_b = 8'b1000_0010;
+        4'd7:
+            cathodes_b = 8'b1111_1000;
+        4'd8:
+            cathodes_b = 8'b1000_0000;
+        4'd9:
+            cathodes_b = 8'b1001_0000;
+        default:
+            cathodes_b = 8'b0111_1111;
+    endcase
+
+endmodule
+
+
+module bcd_to_anodes(
+    input [2:0] nr_digit_b,
+    output reg [7:0] anodes_b
+);
+
+always @( nr_digit_b )
+    case ( nr_digit_b )
+        3'd0:
+            anodes_b = 8'b1111_1110;
+        3'd1:
+            anodes_b = 8'b1111_1101;
+        3'd2:
+            anodes_b = 8'b1111_1011;
+        3'd3:
+            anodes_b = 8'b1111_0111;
+        3'd4:
+            anodes_b = 8'b1110_1111;
+        3'd5:
+            anodes_b = 8'b1101_1111;
+        3'd6:
+            anodes_b = 8'b1011_1111;
+        3'd7:
+            anodes_b = 8'b0111_1111;
+        default:
+            anodes_b = 8'b1111_1110;
+    endcase
+
+endmodule

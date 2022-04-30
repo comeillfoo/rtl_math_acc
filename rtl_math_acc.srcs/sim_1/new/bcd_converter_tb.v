@@ -22,49 +22,48 @@
 
 module bcd_converter_tb;
 
-reg clk, start, rst;
+reg clk_i, start_i, rst_i;
 reg [15:0] x; 
 wire [3:0] digits [7:0];
-wire [3:0] end_step;
-wire busy;
+wire busy_o, end_step_o;
 
 bcd_converter converter(
-    .clk_i(clk),
-    .start_i(start),
-    .rst_i(rst),
-    .half_word_bi(x),
-    .d0_bo(digits[0]),
-    .d1_bo(digits[1]),
-    .d2_bo(digits[2]),
-    .d3_bo(digits[3]),
-    .d4_bo(digits[4]),
-    .d5_bo(digits[5]),
-    .d6_bo(digits[6]),
-    .d7_bo(digits[7]),
-    .end_step_bo(end_step),
-    .busy_o(busy)
+    .clk(clk_i),
+    .start(start_i),
+    .rst(rst_i),
+    .half_word_b(x),
+    .d0_b(digits[0]),
+    .d1_b(digits[1]),
+    .d2_b(digits[2]),
+    .d3_b(digits[3]),
+    .d4_b(digits[4]),
+    .d5_b(digits[5]),
+    .d6_b(digits[6]),
+    .d7_b(digits[7]),
+    .end_step(end_step_o),
+    .busy(busy_o)
 );
 
-always #10 clk = ~clk;
+always #10 clk_i = ~clk_i;
 
 reg [15:0] expected_val;
 reg [15:0] test_val;
 
 integer i;
 initial begin
-    clk = 1;
-    rst = 1;
-    start = 0;
+    clk_i = 1;
+    rst_i = 1;
+    start_i = 0;
     #20
-    rst = 0;
+    rst_i = 0;
     for ( i = 0; i < 65536; i = i + 1 ) begin
         x = i;
         expected_val = i;
         test_val = 0;
-        start = 1;
+        start_i = 1;
         
         #10
-        start = 0;
+        start_i = 0;
         
         #330
         test_val = ((((((( digits[7] * 10 ) * 10
