@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1651188866">
   <File Type="PA-TCL" Name="total_fn_7seg_wrapper.tcl"/>
+  <File Type="RDS-DCP" Name="total_fn_7seg_wrapper.dcp"/>
   <File Type="REPORTS-TCL" Name="total_fn_7seg_wrapper_reports.tcl"/>
   <File Type="RDS-RDS" Name="total_fn_7seg_wrapper.vds"/>
-  <File Type="RDS-DCP" Name="total_fn_7seg_wrapper.dcp"/>
-  <File Type="RDS-UTIL-PB" Name="total_fn_7seg_wrapper_utilization_synth.pb"/>
-  <File Type="RDS-UTIL" Name="total_fn_7seg_wrapper_utilization_synth.rpt"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/subfn.v">
