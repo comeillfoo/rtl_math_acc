@@ -1,7 +1,7 @@
 Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2017.4 (lin64) Build 2086221 Fri Dec 15 20:54:30 MST 2017
-| Date             : Sat Apr 30 17:15:15 2022
+| Date             : Wed May  4 15:51:21 2022
 | Host             : comeillfoo running 64-bit Ubuntu 22.04 LTS
 | Command          : report_power -file func_wrapper_power_routed.rpt -pb func_wrapper_power_summary_routed.pb -rpx func_wrapper_power_routed.rpx
 | Design           : func_wrapper
@@ -33,7 +33,7 @@ Table of Contents
 | Total On-Chip Power (W)  | 0.113        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.015        |
+| Dynamic (W)              | 0.016        |
 | Device Static (W)        | 0.097        |
 | Effective TJA (C/W)      | 4.6          |
 | Max Ambient (C)          | 84.5         |
@@ -52,14 +52,14 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.001 |        3 |       --- |             --- |
+| Clocks         |     0.002 |        3 |       --- |             --- |
 | Slice Logic    |    <0.001 |      416 |       --- |             --- |
 |   LUT as Logic |    <0.001 |      153 |     63400 |            0.24 |
 |   CARRY4       |    <0.001 |       15 |     15850 |            0.09 |
 |   Register     |    <0.001 |      173 |    126800 |            0.14 |
 |   F7/F8 Muxes  |    <0.001 |        7 |     63400 |            0.01 |
 |   Others       |     0.000 |       12 |       --- |             --- |
-| Signals        |    <0.001 |      280 |       --- |             --- |
+| Signals        |    <0.001 |      281 |       --- |             --- |
 | I/O            |     0.012 |       37 |       210 |           17.62 |
 | Static Power   |     0.097 |          |           |                 |
 | Total          |     0.113 |          |           |                 |
@@ -141,10 +141,10 @@ Table of Contents
 +--------------+-----------+
 | Name         | Power (W) |
 +--------------+-----------+
-| func_wrapper |     0.015 |
+| func_wrapper |     0.016 |
 |   converter  |    <0.001 |
 |   divider    |    <0.001 |
-|   fn         |     0.001 |
+|   fn         |     0.002 |
 |     m        |    <0.001 |
 |     s        |    <0.001 |
 |   selector   |    <0.001 |

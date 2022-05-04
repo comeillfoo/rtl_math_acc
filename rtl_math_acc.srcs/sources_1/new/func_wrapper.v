@@ -21,7 +21,7 @@
 
 
 module func_wrapper
-    #( FN_DIVISOR = 50_000_000 ) (
+    #( FN_DIVISOR = 50_000 ) (
     input clk_i,
     input rst_i,
     input start_i,
