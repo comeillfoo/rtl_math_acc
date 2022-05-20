@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1651668498">
-  <File Type="VDS-TIMING-PB" Name="func_wrapper_timing_summary_synth.pb"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="func_wrapper_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="func_wrapper.dcp"/>
+  <File Type="PA-TCL" Name="func_wrapper.tcl"/>
+  <File Type="REPORTS-TCL" Name="func_wrapper_reports.tcl"/>
+  <File Type="RDS-RDS" Name="func_wrapper.vds"/>
   <File Type="RDS-UTIL-PB" Name="func_wrapper_utilization_synth.pb"/>
   <File Type="RDS-UTIL" Name="func_wrapper_utilization_synth.rpt"/>
-  <File Type="RDS-PROPCONSTRS" Name="func_wrapper_drc_synth.rpt"/>
-  <File Type="RDS-RDS" Name="func_wrapper.vds"/>
-  <File Type="REPORTS-TCL" Name="func_wrapper_reports.tcl"/>
-  <File Type="PA-TCL" Name="func_wrapper.tcl"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/display_wrappers.v">

@@ -24,3 +24,5 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "/home/comeillfoo/fun/functional-des
 INFO: [VRFC 10-311] analyzing module clock_divider_tb
 INFO: [VRFC 10-2263] Analyzing Verilog file "/home/comeillfoo/fun/functional-design/rtl_math_acc/rtl_math_acc.srcs/sim_1/new/func_wrapper_tb.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module func_wrapper_tb
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/comeillfoo/fun/functional-design/rtl_math_acc/rtl_math_acc.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
